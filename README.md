@@ -1,5 +1,5 @@
 # graphs-and-toposort
-graph representations with topological sorting in 2 ways
+graph representations with topological sorting in 2 ways '\n'
 Here's sample graph for excercising
 
 ![Screen](https://github.com/Haradd/graphs-and-toposort/blob/master/Directed_acyclic_graph.png)
