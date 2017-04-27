@@ -57,14 +57,18 @@ class Graph:
         for edge_index in range(len(self.edge_list)):
                 deg_in[self.edge_list[edge_index][1]] += 1
 
-        for vertex in deg_in:
-            if deg_in[vertex] == 0:
-                result.append(vertex)
-                for edge in self.edge_list:
-                    if edge[0] == vertex:
-                        deg_in[edge[1]] -= 1
-        return result
 
+        while len(result) != self.size:
+            for vertex in range(self.size):
+                if vertex in result:
+                    continue
+                if deg_in[vertex] == 0:
+                    result.append(vertex)
+                    del deg_in[vertex]
+                    for edge in self.edge_list:
+                        if edge[0] == vertex:
+                            deg_in[edge[1]] -= 1
+        return result
 
 
 #sample adjacency matrix from  https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search
