@@ -48,18 +48,17 @@ class Graph:
             for neighbor in self.adj_list[vertex]:
                 deg_in[neighbor] += 1
 
-        to_remove = []
-        for vertex in deg_in:
-            if deg_in[vertex] == 0:
-                result.append(vertex)
-                to_remove.append(vertex)
-                for neighbor in self.adj_list[vertex]:
-                    deg_in[neighbor] -= 1
+
+        while len(result) != self.size:
+            for vertex in range(self.size):
+                if vertex in result:
+                    continue
+                if deg_in[vertex] == 0:
+                    result.append(vertex)
+                    del deg_in[vertex]
+                    for neighbor in self.adj_list[vertex]:
+                        deg_in[neighbor] -= 1
         return result
-
-    def print_list(self):
-        print(self.adj_list)
-
 
 
 #sample adjacency matrix from  https://en.wikipedia.org/wiki/Topological_sorting#Depth-first_search
@@ -89,5 +88,3 @@ for n in range(2000,20001,2000):
     bfs = timeit.Timer('inst.bfs_sort()',
                        'from __main__ import Graph; inst=Graph({})'.format(n))
     print(n, ',', dfs.timeit(1), ',', bfs.timeit(1))
-
-
